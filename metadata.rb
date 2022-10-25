@@ -42,6 +42,14 @@ attribute "onlinefs/rondb/batch_size",
           :description => "batch size to commit to rondb (Default: 300)",
           :type => "string"
 
+attribute "onlinefs/rondb/max_cached_sessions",
+          :description => "max number of cached clusterj sessions (Default: 20)",
+          :type => "string"
+
+attribute "onlinefs/rondb/reconnect_timeout",
+          :description => "reconnect timeout for clusterj session factory (Default: 1)",
+          :type => "string"
+
 attribute "onlinefs/rondb/max_transactions",
           :description => "max number of concurrent clusterj transactions (Default: 1024)",
           :type => "string"
