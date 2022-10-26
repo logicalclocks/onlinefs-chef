@@ -26,6 +26,7 @@ default['onlinefs']['hopsworks']['password']  = "onlinefspw"
 default['onlinefs']['monitoring']             = 12800
 
 default['onlinefs']['service']['thread_number'] = 10
+default['onlinefs']['service']['get_session_retry_sleep_ms'] = 100
 
 default['onlinefs']['rondb']['batch_size']           = 300
 default['onlinefs']['rondb']['max_transactions']     = 1024

@@ -34,6 +34,10 @@ attribute "onlinefs/service/thread_number",
           :description => "number of threads reading from kafka and writing to rondb",
           :type => "string"
 
+attribute "onlinefs/service/get_session_retry_sleep_ms",
+          :description => "time in ms for threads to sleep between the retries of getting session",
+          :type => "string"
+
 attribute "onlinefs/monitoring",
           :description => "Port on which the monitoring page is available",
           :type => "string"
