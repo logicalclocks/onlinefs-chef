@@ -32,5 +32,5 @@ default['onlinefs']['rondb']['batch_size']           = 300
 default['onlinefs']['rondb']['max_transactions']     = 1024
 default['onlinefs']['rondb']['max_cached_sessions']  = 20
 default['onlinefs']['rondb']['max_cached_instances'] = 1024
-default['onlinefs']['rondb']['reconnect_timeout']    = 1
+default['onlinefs']['rondb']['reconnect_timeout']    = 5
 default['onlinefs']['rondb']['pool_size']            = 1
