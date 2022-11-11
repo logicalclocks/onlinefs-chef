@@ -55,7 +55,7 @@ attribute "onlinefs/rondb/max_cached_instances",
           :type => "string"
 
 attribute "onlinefs/rondb/reconnect_timeout",
-          :description => "reconnect timeout for clusterj session factory (Default: 1)",
+          :description => "reconnect timeout for clusterj session factory (Default: 5)",
           :type => "string"
 
 attribute "onlinefs/rondb/max_transactions",
