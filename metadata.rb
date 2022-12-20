@@ -66,6 +66,14 @@ attribute "onlinefs/rondb/pool_size",
           :description => "Size of the connection pool for each session factory (Default: 1)",
           :type => "string"
 
+attribute "onlinefs/rondb/use_session_cache",
+          :description => "Whether to use clusterj session cache functionality (Default: false)",
+          :type => "string"
+
+attribute "onlinefs/rondb/use_dynamic_object_cache",
+          :description => "Whether to use clusterj dynamic object cache functionality (Default: false)",
+          :type => "string"
+
 attribute "onlinefs/download_url",
           :description => "Download url for the onlinefs.tgz binaries",
           :type => "string"
