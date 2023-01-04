@@ -193,6 +193,14 @@ file node['onlinefs']['token'] do
 end
 
 # Template the configuration file
+hopsworks_internal_port = 8182
+if node.attribute?('hopsworks')
+  if node['hopsworks'].attribute?('internal') and node['hopsworks']['internal'].attribute?('port')
+    hopsworks_internal_port = node['hopsworks']['internal']['port']
+  end
+end
+hopsworks_url = "https://#{consul_helper.get_service_fqdn("hopsworks.glassfish")}:#{hopsworks_internal_port}"
+
 kafka_fqdn = consul_helper.get_service_fqdn("broker.kafka")
 mgm_fqdn = consul_helper.get_service_fqdn("mgm.rondb")
 template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
@@ -203,7 +211,8 @@ template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
   variables(
     {
       :kafka_fqdn => kafka_fqdn,
-      :mgm_fqdn => mgm_fqdn
+      :mgm_fqdn => mgm_fqdn,
+      :hopsworks_url => hopsworks_url
     }
   )
 end
