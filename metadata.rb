@@ -38,6 +38,10 @@ attribute "onlinefs/service/get_session_retry_sleep_ms",
           :description => "time in ms for threads to sleep between the retries of getting session",
           :type => "string"
 
+attribute "onlinefs/service/max_blacklist_size",
+          :description => "Maximum count of entries stored in blacklist",
+          :type => "string"
+
 attribute "onlinefs/monitoring",
           :description => "Port on which the monitoring page is available",
           :type => "string"
