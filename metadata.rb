@@ -30,6 +30,14 @@ attribute "onlinefs/group_id",
           :description => "onlinefs group id. Default: 1516",
           :type => "string"
 
+attribute "onlinefs/java_start_heap_size",
+          :description => "set initial Java heap size for onlinefs. Default: 1024M",
+          :type => "string"
+
+attribute "onlinefs/java_max_heap_size",
+          :description => "set maximum Java heap size for onlinefs. Default: 4096M",
+          :type => "string"
+
 attribute "onlinefs/service/thread_number",
           :description => "number of threads reading from kafka and writing to rondb",
           :type => "string"
