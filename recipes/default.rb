@@ -99,6 +99,13 @@ end
   end
 }
 
+directory node['onlinefs']['bin'] do
+  owner node['onlinefs']['user']
+  group node['onlinefs']['group']
+  mode "0750"
+  action :create
+end
+
 # Generate a certificate
 instance_id = private_recipe_ips("onlinefs", "default").sort.find_index(my_private_ip())
 service_fqdn = consul_helper.get_service_fqdn("onlinefs")
@@ -224,6 +231,13 @@ template "#{node['onlinefs']['etc']}/log4j.properties" do
   mode 0750
 end
 
+template "#{node['onlinefs']['bin']}/waiter.sh" do
+  source "waiter.sh.erb"
+  owner node['onlinefs']['user']
+  group node['onlinefs']['group']
+  mode 0750
+end
+
 # Download and load the Docker image
 image_url = node['onlinefs']['download_url']
 base_filename = File.basename(image_url)
@@ -304,4 +318,13 @@ if service_discovery_enabled()
     service_definition "onlinefs.hcl.erb"
     action :register
   end
+end
+
+bash 'wait-for-onlinefs' do
+  user node['onlinefs']['user']
+  group node['onlinefs']['group']
+  timeout 250
+  code <<-EOH
+      #{node['onlinefs']['bin']}/waiter.sh
+  EOH
 end

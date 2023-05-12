@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+i=0
+while true
+do
+    curl -s --fail http://127.0.0.1:<%= node['onlinefs']['monitoring'] %>/metrics > /dev/null 2>&1
+    if [ $? -eq "0" ]
+    then
+        exit 0
+    fi
+    echo "onlinefs service is not running/healthy"
+    let i++
+    if [ $i -gt 100 ]
+    then
+        echo "Exhausted all retries"
+        exit 1
+    fi
+    sleep 2s
+done
