@@ -4,6 +4,7 @@
     <threadNumber><%= node['onlinefs']['service']['thread_number'] %></threadNumber>
     <getSessionRetrySleepMs><%= node['onlinefs']['service']['get_session_retry_sleep_ms'] %></getSessionRetrySleepMs>
     <maxBlacklistSize><%= node['onlinefs']['service']['max_blacklist_size'] %></maxBlacklistSize>
+    <keyLocation>/certs/<%= node['onlinefs']['user'] %>__passwd</keyLocation>
   </service>
 
   <rondb>
@@ -17,15 +18,28 @@
     <useSessionCache><%= node['onlinefs']['rondb']['use_session_cache'] %></useSessionCache>
     <useDynamicObjectCache><%= node['onlinefs']['rondb']['use_dynamic_object_cache'] %></useDynamicObjectCache>
   </rondb>
+  
+  <kafkaConfig>
+    <bootstrap.servers><%= @kafka_fqdn %>:<%= node['kkafka']['broker']['port'] %</bootstrap.servers>
+    <security.protocol>SSL</security.protocol>
+    <ssl.truststore.location>/certs/<%= node['onlinefs']['user'] %>__tstore.jks</ssl.truststore.location>
+    <ssl.keystore.location>/certs/<%= node['onlinefs']['user'] %>__kstore.jks</ssl.keystore.location>
+    <ssl.endpoint.identification.algorithm></ssl.endpoint.identification.algorithm>
+    <group.id>0</group.id>
+    <auto.offset.reset>earliest</auto.offset.reset>
+    <metadata.max.age.ms>60000</metadata.max.age.ms>
+    <max.partition.fetch.bytes>1048576</max.partition.fetch.bytes>
+    <max.poll.records>1000</max.poll.records>
+    <enable.auto.commit>false</enable.auto.commit>
+  </kafkaConfig>
 
-  <kafka>
-    <bootstrapServers><%= @kafka_fqdn %>:<%= node['kkafka']['broker']['port'] %></bootstrapServers>
-    <trustStoreLocation>/certs/<%= node['onlinefs']['user'] %>__tstore.jks</trustStoreLocation>
-    <keyStoreLocation>/certs/<%= node['onlinefs']['user'] %>__kstore.jks</keyStoreLocation>
-    <keyLocation>/certs/<%= node['onlinefs']['user'] %>__passwd</keyLocation>
-  </kafka>
+  <kafkaConsumer>
+    <topicPattern>.*_onlinefs</topicPattern>
+    <pollTimeoutMs>1000</pollTimeoutMs>
+  </kafkaConsumer>
 
   <hopsworks>
+    <trustStoreLocation>/certs/<%= node['onlinefs']['user'] %>__tstore.jks</trustStoreLocation>
     <tokenLocation>/onlinefs/etc/token</tokenLocation>
     <url><%= @hopsworks_url %></url>
   </hopsworks>
