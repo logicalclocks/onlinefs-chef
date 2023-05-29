@@ -4,7 +4,6 @@
     <threadNumber><%= node['onlinefs']['service']['thread_number'] %></threadNumber>
     <getSessionRetrySleepMs><%= node['onlinefs']['service']['get_session_retry_sleep_ms'] %></getSessionRetrySleepMs>
     <maxBlacklistSize><%= node['onlinefs']['service']['max_blacklist_size'] %></maxBlacklistSize>
-    <keyLocation>/certs/<%= node['onlinefs']['user'] %>__passwd</keyLocation>
   </service>
 
   <rondb>
@@ -23,7 +22,10 @@
     <bootstrap.servers><%= @kafka_fqdn %>:<%= node['kkafka']['broker']['port'] %</bootstrap.servers>
     <security.protocol>SSL</security.protocol>
     <ssl.truststore.location>/certs/<%= node['onlinefs']['user'] %>__tstore.jks</ssl.truststore.location>
+    <ssl.truststore.password>adminpw</ssl.truststore.password>
     <ssl.keystore.location>/certs/<%= node['onlinefs']['user'] %>__kstore.jks</ssl.keystore.location>
+    <ssl.keystore.password>adminpw</ssl.keystore.password>
+    <ssl.key.password>adminpw</ssl.key.password>
     <ssl.endpoint.identification.algorithm></ssl.endpoint.identification.algorithm>
     <group.id>0</group.id>
     <auto.offset.reset>earliest</auto.offset.reset>
