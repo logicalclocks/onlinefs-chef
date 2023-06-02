@@ -208,7 +208,6 @@ if node.attribute?('hopsworks')
 end
 hopsworks_url = "https://#{consul_helper.get_service_fqdn("hopsworks.glassfish")}:#{hopsworks_internal_port}"
 
-kafka_fqdn = consul_helper.get_service_fqdn("broker.kafka")
 mgm_fqdn = consul_helper.get_service_fqdn("mgm.rondb")
 template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
   source "onlinefs-site.xml.erb"
@@ -217,9 +216,21 @@ template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
   mode 0750
   variables(
     {
-      :kafka_fqdn => kafka_fqdn,
       :mgm_fqdn => mgm_fqdn,
       :hopsworks_url => hopsworks_url
+    }
+  )
+end
+
+kafka_fqdn = consul_helper.get_service_fqdn("broker.kafka")
+template "#{node['onlinefs']['etc']}/onlinefs-kafka.properties" do
+  source "onlinefs-kafka.properties.erb"
+  owner node['onlinefs']['user']
+  group node['onlinefs']['group']
+  mode 0750
+  variables(
+    {
+      :kafka_fqdn => kafka_fqdn
     }
   )
 end
