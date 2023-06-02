@@ -19,7 +19,7 @@
   </rondb>
   
   <kafkaConfig>
-    <bootstrap.servers><%= @kafka_fqdn %>:<%= node['kkafka']['broker']['port'] %</bootstrap.servers>
+    <bootstrap.servers><%= @kafka_fqdn %>:<%= node['kkafka']['broker']['port'] %></bootstrap.servers>
     <security.protocol>SSL</security.protocol>
     <ssl.truststore.location>/certs/<%= node['onlinefs']['user'] %>__tstore.jks</ssl.truststore.location>
     <ssl.truststore.password>adminpw</ssl.truststore.password>
