@@ -242,6 +242,7 @@ template "#{node['onlinefs']['etc']}/log4j.properties" do
   mode 0750
 end
 
+require 'fileutils'
 if !node['onlinefs']['config_dir'].nil?
     # Copy everything from the provided config_dir to etc overwriting any duplicates
     FileUtils.cp_r(Dir["#{node['onlinefs']['config_dir']}/*"], node['onlinefs']['etc'])
