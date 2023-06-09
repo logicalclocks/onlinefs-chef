@@ -244,8 +244,8 @@ end
 
 require 'fileutils'
 if !node['onlinefs']['config_dir'].nil?
-    # Copy everything from the provided config_dir to etc overwriting any duplicates
-    FileUtils.cp_r(Dir["#{node['onlinefs']['config_dir']}/*"], node['onlinefs']['etc'])
+  # Copy everything from the provided config_dir to etc overwriting any duplicates
+  FileUtils.cp_r(Dir["#{node['onlinefs']['config_dir']}/*"], node['onlinefs']['etc'])
 end
 
 template "#{node['onlinefs']['bin']}/waiter.sh" do
