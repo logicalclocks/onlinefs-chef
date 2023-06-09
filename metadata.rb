@@ -38,6 +38,10 @@ attribute "onlinefs/java_max_heap_size",
           :description => "set maximum Java heap size for onlinefs. Default: 4096M",
           :type => "string"
 
+attribute "onlinefs/config_dir",
+          :description => "If specified the contents of this directory will be copied into onlinefs/etc folder",
+          :type => "string"
+
 attribute "onlinefs/service/thread_number",
           :description => "number of threads reading from kafka and writing to rondb",
           :type => "string"

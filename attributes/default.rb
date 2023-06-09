@@ -19,6 +19,8 @@ default['onlinefs']['token']                  = "#{node['onlinefs']['etc']}/toke
 default['onlinefs']['java_start_heap_size']   = '1024M'
 default['onlinefs']['java_max_heap_size']     = '4096M'
 
+default['onlinefs']['config_dir']             = nil
+
 # Data volume directories
 default['onlinefs']['data_volume']['root_dir']  = "#{node['data']['dir']}/onlinefs"
 default['onlinefs']['data_volume']['etc_dir']   = "#{node['onlinefs']['data_volume']['root_dir']}/etc"
