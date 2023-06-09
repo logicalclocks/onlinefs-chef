@@ -19,8 +19,8 @@
   </rondb>
 
   <kafkaConsumer>
-    <topicPattern>.*_onlinefs</topicPattern>
-    <pollTimeoutMs>1000</pollTimeoutMs>
+    <topicPattern><%= node['onlinefs']['kafka_consumer']['topic_pattern'] %></topicPattern>
+    <pollTimeoutMs><%= node['onlinefs']['kafka_consumer']['poll_timeout_ms'] %></pollTimeoutMs>
   </kafkaConsumer>
 
   <hopsworks>

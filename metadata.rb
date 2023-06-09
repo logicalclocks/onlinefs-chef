@@ -89,3 +89,11 @@ attribute "onlinefs/rondb/use_dynamic_object_cache",
 attribute "onlinefs/download_url",
           :description => "Download url for the onlinefs.tgz binaries",
           :type => "string"
+
+attribute "onlinefs/kafka_consumer/topic_pattern",
+          :description => "Pattern to which onlinefs kafka consumer should subscribe to (Default: .*_onlinefs)",
+          :type => "string"
+
+attribute "onlinefs/kafka_consumer/poll_timeout_ms",
+          :description => "Duration of kafka consumer poll request in onlinefs (Default: 1000)",
+          :type => "string"
