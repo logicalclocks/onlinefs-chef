@@ -18,6 +18,10 @@
     <useDynamicObjectCache><%= node['onlinefs']['rondb']['use_dynamic_object_cache'] %></useDynamicObjectCache>
   </rondb>
 
+  <kafka>
+    <propertiesFile><%= node['onlinefs']['kafka']['properties_file'] %></propertiesFile>
+  </kafka>
+
   <kafkaConsumer>
     <topicPattern><%= node['onlinefs']['kafka_consumer']['topic_pattern'] %></topicPattern>
     <pollTimeoutMs><%= node['onlinefs']['kafka_consumer']['poll_timeout_ms'] %></pollTimeoutMs>

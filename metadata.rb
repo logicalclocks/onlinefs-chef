@@ -90,6 +90,10 @@ attribute "onlinefs/download_url",
           :description => "Download url for the onlinefs.tgz binaries",
           :type => "string"
 
+attribute "onlinefs/kafka/properties_file",
+          :description => "File used for configuring kafka client used by onlinefs (Default: onlinefs-kafka.properties)",
+          :type => "string"
+
 attribute "onlinefs/kafka_consumer/topic_pattern",
           :description => "Pattern to which onlinefs kafka consumer should subscribe to (Default: .*_onlinefs)",
           :type => "string"

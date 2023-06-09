@@ -42,6 +42,9 @@ default['onlinefs']['rondb']['pool_size']            = 1
 default['onlinefs']['rondb']['use_session_cache']    = "false"
 default['onlinefs']['rondb']['use_dynamic_object_cache'] = "false"
 
+# kafka
+default['onlinefs']['kafka']['properties_file']   = "onlinefs-kafka.properties"
+
 # kafka_consumer
 default['onlinefs']['kafka_consumer']['topic_pattern']    = ".*_onlinefs"
 default['onlinefs']['kafka_consumer']['poll_timeout_ms']  = 1000
