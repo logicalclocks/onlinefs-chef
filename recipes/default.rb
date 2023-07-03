@@ -233,17 +233,17 @@ ruby_block 'copy-config-dir' do
 end
 
 kafka_fqdn = consul_helper.get_service_fqdn("broker.kafka")
-template "#{node['onlinefs']['etc']}/#{['onlinefs']['kafka']['properties_file']}" do
+template "#{node['onlinefs']['etc']}/#{node['onlinefs']['kafka']['properties_file']}" do
   source "onlinefs-kafka.properties.erb"
   owner node['onlinefs']['user']
   group node['onlinefs']['group']
   mode 0750
-  action :create_if_missing
   variables(
     {
       :kafka_fqdn => kafka_fqdn
     }
   )
+  only_if { node['onlinefs']['config_dir'].nil? }
 end
 
 template "#{node['onlinefs']['etc']}/log4j.properties" do
