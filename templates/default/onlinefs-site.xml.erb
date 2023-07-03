@@ -19,13 +19,16 @@
   </rondb>
 
   <kafka>
-    <bootstrapServers><%= @kafka_fqdn %>:<%= node['kkafka']['broker']['port'] %></bootstrapServers>
-    <trustStoreLocation>/certs/<%= node['onlinefs']['user'] %>__tstore.jks</trustStoreLocation>
-    <keyStoreLocation>/certs/<%= node['onlinefs']['user'] %>__kstore.jks</keyStoreLocation>
-    <keyLocation>/certs/<%= node['onlinefs']['user'] %>__passwd</keyLocation>
+    <propertiesFile><%= node['onlinefs']['kafka']['properties_file'] %></propertiesFile>
   </kafka>
 
+  <kafkaConsumer>
+    <topicPattern><%= node['onlinefs']['kafka_consumer']['topic_pattern'] %></topicPattern>
+    <pollTimeoutMs><%= node['onlinefs']['kafka_consumer']['poll_timeout_ms'] %></pollTimeoutMs>
+  </kafkaConsumer>
+
   <hopsworks>
+    <trustStoreLocation>/certs/<%= node['onlinefs']['user'] %>__tstore.jks</trustStoreLocation>
     <tokenLocation>/onlinefs/etc/token</tokenLocation>
     <url><%= @hopsworks_url %></url>
   </hopsworks>

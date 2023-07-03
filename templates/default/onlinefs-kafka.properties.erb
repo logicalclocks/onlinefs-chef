@@ -1,0 +1,14 @@
+bootstrap.servers = <%= @kafka_fqdn %>:<%= node['kkafka']['broker']['port'] %>
+security.protocol = SSL
+ssl.truststore.location = /certs/<%= node['onlinefs']['user'] %>__tstore.jks
+ssl.truststore.password = adminpw
+ssl.keystore.location = /certs/<%= node['onlinefs']['user'] %>__kstore.jks
+ssl.keystore.password = adminpw
+ssl.key.password = adminpw
+ssl.endpoint.identification.algorithm = 
+group.id = 0
+auto.offset.reset = earliest
+metadata.max.age.ms = 60000
+max.partition.fetch.bytes = 1048576
+max.poll.records = 1000
+enable.auto.commit = false

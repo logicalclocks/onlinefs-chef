@@ -38,6 +38,10 @@ attribute "onlinefs/java_max_heap_size",
           :description => "set maximum Java heap size for onlinefs. Default: 4096M",
           :type => "string"
 
+attribute "onlinefs/config_dir",
+          :description => "If specified the contents of this directory will be copied into onlinefs/etc folder",
+          :type => "string"
+
 attribute "onlinefs/service/thread_number",
           :description => "number of threads reading from kafka and writing to rondb",
           :type => "string"
@@ -88,4 +92,16 @@ attribute "onlinefs/rondb/use_dynamic_object_cache",
 
 attribute "onlinefs/download_url",
           :description => "Download url for the onlinefs.tgz binaries",
+          :type => "string"
+
+attribute "onlinefs/kafka/properties_file",
+          :description => "File used for configuring kafka client used by onlinefs (Default: onlinefs-kafka.properties)",
+          :type => "string"
+
+attribute "onlinefs/kafka_consumer/topic_pattern",
+          :description => "Pattern to which onlinefs kafka consumer should subscribe to (Default: .*_onlinefs)",
+          :type => "string"
+
+attribute "onlinefs/kafka_consumer/poll_timeout_ms",
+          :description => "Duration of kafka consumer poll request in onlinefs (Default: 1000)",
           :type => "string"

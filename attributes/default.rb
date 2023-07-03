@@ -19,6 +19,8 @@ default['onlinefs']['token']                  = "#{node['onlinefs']['etc']}/toke
 default['onlinefs']['java_start_heap_size']   = '1024M'
 default['onlinefs']['java_max_heap_size']     = '4096M'
 
+default['onlinefs']['config_dir']             = nil
+
 # Data volume directories
 default['onlinefs']['data_volume']['root_dir']  = "#{node['data']['dir']}/onlinefs"
 default['onlinefs']['data_volume']['etc_dir']   = "#{node['onlinefs']['data_volume']['root_dir']}/etc"
@@ -41,3 +43,10 @@ default['onlinefs']['rondb']['reconnect_timeout']    = 5
 default['onlinefs']['rondb']['pool_size']            = 1
 default['onlinefs']['rondb']['use_session_cache']    = "false"
 default['onlinefs']['rondb']['use_dynamic_object_cache'] = "false"
+
+# kafka
+default['onlinefs']['kafka']['properties_file']   = "onlinefs-kafka.properties"
+
+# kafka_consumer
+default['onlinefs']['kafka_consumer']['topic_pattern']    = ".*_onlinefs"
+default['onlinefs']['kafka_consumer']['poll_timeout_ms']  = 1000
