@@ -226,11 +226,10 @@ ruby_block 'copy-config-dir' do
   block do
     require 'fileutils'
 
-    if !node['onlinefs']['config_dir'].nil?
-      # Copy everything from the provided config_dir to etc overwriting any duplicates
-      FileUtils.cp_r(Dir["#{node['onlinefs']['config_dir']}/*"], node['onlinefs']['etc'])
-    end
+    # Copy everything from the provided config_dir to etc overwriting any duplicates
+    FileUtils.cp_r(Dir["#{node['onlinefs']['config_dir']}/*"], node['onlinefs']['etc'])
   end
+  not_if { node['onlinefs']['config_dir'].nil? }
 end
 
 kafka_fqdn = consul_helper.get_service_fqdn("broker.kafka")
