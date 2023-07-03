@@ -222,10 +222,15 @@ template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
   )
 end
 
-require 'fileutils'
-if !node['onlinefs']['config_dir'].nil?
-  # Copy everything from the provided config_dir to etc overwriting any duplicates
-  FileUtils.cp_r(Dir["#{node['onlinefs']['config_dir']}/*"], node['onlinefs']['etc'])
+ruby_block 'copy-config-dir' do
+  block do
+    require 'fileutils'
+
+    if !node['onlinefs']['config_dir'].nil?
+      # Copy everything from the provided config_dir to etc overwriting any duplicates
+      FileUtils.cp_r(Dir["#{node['onlinefs']['config_dir']}/*"], node['onlinefs']['etc'])
+    end
+  end
 end
 
 kafka_fqdn = consul_helper.get_service_fqdn("broker.kafka")
