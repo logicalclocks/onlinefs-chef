@@ -3,7 +3,7 @@ security.protocol = SSL
 ssl.truststore.location = /certs/<%= node['onlinefs']['user'] %>__tstore.jks
 ssl.truststore.password = <%= node['kkafka']['broker']['ssl']['truststore']['password']%>
 ssl.keystore.location = /certs/<%= node['onlinefs']['user'] %>__kstore.jks
-ssl.keystore.password = <%= node['kkafka']['consumer']['ssl']['keystore']['password']%>
+ssl.keystore.password = <%= node['kkafka']['broker']['ssl']['keystore']['password']%>
 ssl.key.password = <%= node['kkafka']['broker']['ssl']['key']['password']%>
 ssl.endpoint.identification.algorithm = 
 group.id = 0
