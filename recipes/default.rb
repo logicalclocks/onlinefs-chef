@@ -301,7 +301,7 @@ local_systemd_dependencies = ""
 if service_discovery_enabled()
   local_systemd_dependencies += "consul.service"
 end
-if exists_local("kafka", "default")
+if exists_local("kkafka", "default")
   local_systemd_dependencies += " kafka.service"
 end
 
