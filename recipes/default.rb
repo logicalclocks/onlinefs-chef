@@ -208,7 +208,7 @@ if node.attribute?('hopsworks')
 end
 hopsworks_url = "https://#{consul_helper.get_service_fqdn("hopsworks.glassfish")}:#{hopsworks_internal_port}"
 
-mgm_fqdn = consul_helper.get_service_fqdn("mgm.rondb")
+mgm_fqdn = consul_helper.get_service_fqdn("#{node['ndb']['mgmd']['consul_tag']}.rondb")
 template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
   source "onlinefs-site.xml.erb"
   owner node['onlinefs']['user']
