@@ -4,3 +4,4 @@ dependencies:
       - kkafka::default
       - hopsworks::default
       - consul::slave
+      - hops::docker
