@@ -39,7 +39,7 @@ attribute "onlinefs/java_max_heap_size",
           :type => "string"
 
 attribute "onlinefs/config_dir",
-          :description => "If specified the contents of this directory will be copied into onlinefs/etc folder",
+          :description => "Kafka configuration for bring your own Kafka. The content of this directory will be copied in onlinefs/etc and mounted on the container.",
           :type => "string"
 
 attribute "onlinefs/service/thread_number",
