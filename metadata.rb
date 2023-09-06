@@ -102,6 +102,10 @@ attribute "onlinefs/kafka_consumer/topic_pattern",
           :description => "Pattern to which onlinefs kafka consumer should subscribe to (Default: .*_onlinefs)",
           :type => "string"
 
+attribute "onlinefs/kafka_consumer/topic_list",
+          :description => "Comma separated list of topics to which onlinefs kafka consumer should subscribe to (When specified overwrites topic_pattern)",
+          :type => "string"
+
 attribute "onlinefs/kafka_consumer/poll_timeout_ms",
           :description => "Duration of kafka consumer poll request in onlinefs (Default: 1000)",
           :type => "string"

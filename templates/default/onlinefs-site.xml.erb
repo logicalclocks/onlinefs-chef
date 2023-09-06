@@ -24,6 +24,7 @@
 
   <kafkaConsumer>
     <topicPattern><%= node['onlinefs']['kafka_consumer']['topic_pattern'] %></topicPattern>
+    <topicList><%= node['onlinefs']['kafka_consumer']['topic_list'] %></topicList>
     <pollTimeoutMs><%= node['onlinefs']['kafka_consumer']['poll_timeout_ms'] %></pollTimeoutMs>
   </kafkaConsumer>
 

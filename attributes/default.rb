@@ -49,4 +49,5 @@ default['onlinefs']['kafka']['properties_file']   = "onlinefs-kafka.properties"
 
 # kafka_consumer
 default['onlinefs']['kafka_consumer']['topic_pattern']    = ".*_onlinefs"
+default['onlinefs']['kafka_consumer']['topic_list']       = ""
 default['onlinefs']['kafka_consumer']['poll_timeout_ms']  = 1000
