@@ -15,6 +15,7 @@ default['onlinefs']['etc']                    = "#{node['onlinefs']['home']}/etc
 default['onlinefs']['logs']                   = "#{node['onlinefs']['home']}/logs"
 default['onlinefs']['bin']                    = "#{node['onlinefs']['home']}/bin"
 default['onlinefs']['token']                  = "#{node['onlinefs']['etc']}/token"
+default['onlinefs']['instance_id']            = ""
 
 default['onlinefs']['java_start_heap_size']   = '1024M'
 default['onlinefs']['java_max_heap_size']     = '4096M'
