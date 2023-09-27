@@ -5,3 +5,4 @@ dependencies:
       - hopsworks::default
       - consul::slave
       - hops::docker
+      - ndb::restore_sql
