@@ -107,7 +107,11 @@ directory node['onlinefs']['bin'] do
 end
 
 # Generate a certificate
-instance_id = private_recipe_ips("onlinefs", "default").sort.find_index(my_private_ip())
+instance_id = node['onlinefs']['instance_id']
+if instance_id.casecmp?("")
+  instance_id = private_recipe_ips("onlinefs", "default").sort.find_index(my_private_ip())
+end
+
 service_fqdn = consul_helper.get_service_fqdn("onlinefs")
 
 crypto_dir = x509_helper.get_crypto_dir(node['onlinefs']['user'])
