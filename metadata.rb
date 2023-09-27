@@ -38,6 +38,10 @@ attribute "onlinefs/java_max_heap_size",
           :description => "set maximum Java heap size for onlinefs. Default: 4096M",
           :type => "string"
 
+attribute "onlinefs/instance_id",
+          :description => "Id of the onlinefs instance. Used for certificate generation. (Default: the index in the IP list)",
+          :type => "string"
+
 attribute "onlinefs/config_dir",
           :description => "Kafka configuration for bring your own Kafka. The content of this directory will be copied in onlinefs/etc and mounted on the container.",
           :type => "string"
