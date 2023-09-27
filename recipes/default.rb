@@ -35,7 +35,6 @@ user node['logger']['user'] do
 end
 
 group node['onlinefs']['group'] do
-
   append true
   members [node['logger']['user']]
   not_if { node['install']['external_users'].casecmp("true") == 0 }
@@ -152,47 +151,29 @@ ruby_block 'generate-api-key' do
       :scope => "KAFKA"
     }
 
-    http = Net::HTTP.new(url.host, url.port)
-    http.read_timeout = 120
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    response = http_request_follow_redirect(url, form_params: params)
 
-    jar = ::HTTP::CookieJar.new
+    if( response.is_a?( Net::HTTPSuccess ) )
+        # your request was successful
+        puts "Onlinefs login successful: -> #{response.body}"
 
-    http.start do |connection|
+        api_key_url.query = URI.encode_www_form(api_key_params)
+        response = http_request_follow_redirect(api_key_url,
+                                                body: "",
+                                                authorization: response['Authorization'])
 
-      request = Net::HTTP::Post.new(url)
-      request.set_form_data(params, '&')
-      response = connection.request(request)
-
-      if( response.is_a?( Net::HTTPSuccess ) )
-          # your request was successful
-          puts "Onlinefs login successful: -> #{response.body}"
-
-          response.get_fields('Set-Cookie').each do |value|
-            jar.parse(value, url)
-          end
-
-          api_key_url.query = URI.encode_www_form(api_key_params)
-          request = Net::HTTP::Post.new(api_key_url)
-          request['Content-Type'] = "application/json"
-          request['Cookie'] = ::HTTP::Cookie.cookie_value(jar.cookies(api_key_url))
-          request['Authorization'] = response['Authorization']
-          response = connection.request(request)
-
-          if ( response.is_a? (Net::HTTPSuccess))
-            json_response = ::JSON.parse(response.body)
-            api_key = json_response['key']
-          else
-            puts response.body
-            raise "Error creating onlinefs api-key: #{response.uri}"
-          end
+        if ( response.is_a? (Net::HTTPSuccess))
+          json_response = ::JSON.parse(response.body)
+          api_key = json_response['key']
+        else
+          puts response.body
+          raise "Error creating onlinefs api-key: #{response.uri}"
+        end
       else
           puts response.body
           raise "Error onlinefs login"
       end
     end
-  end
 end
 
 # write api-key to token file
