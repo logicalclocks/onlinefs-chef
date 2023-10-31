@@ -34,6 +34,12 @@
     <url><%= @hopsworks_url %></url>
   </hopsworks>
 
+  <opensearch>
+    <host><%= node['onlinefs']['opensearch']['host'] %></host>
+    <userName><%= node['onlinefs']['opensearch']['user_name'] %></userName>
+    <password><%= node['onlinefs']['opensearch']['password'] %></password>
+  </opensearch>
+
   <metrics>
     <port><%= node['onlinefs']['monitoring'] %></port>
   </metrics>

@@ -13,6 +13,7 @@ depends 'ndb'
 depends 'hops'
 depends 'kagent'
 depends 'consul'
+depends 'elastic'
 
 attribute "onlinefs/user",
           :description => "User to run the online feature store service",

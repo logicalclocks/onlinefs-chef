@@ -52,3 +52,8 @@ default['onlinefs']['kafka']['properties_file']   = "onlinefs-kafka.properties"
 default['onlinefs']['kafka_consumer']['topic_pattern']    = ".*_onlinefs"
 default['onlinefs']['kafka_consumer']['topic_list']       = ""
 default['onlinefs']['kafka_consumer']['poll_timeout_ms']  = 1000
+
+# Opensearch
+default['onlinefs']['opensearch']['host']       = "https://elastic.service.consul:9200"
+default['onlinefs']['opensearch']['user_name']  = node['elastic']['opensearch_security']['onlinefs']['username']
+default['onlinefs']['opensearch']['password']   = node['elastic']['opensearch_security']['onlinefs']['password']
