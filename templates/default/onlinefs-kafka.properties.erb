@@ -5,7 +5,8 @@ ssl.truststore.password = <%= node['hopsworks']['master']['password']%>
 ssl.keystore.location = /certs/<%= node['onlinefs']['user'] %>__kstore.jks
 ssl.keystore.password = <%= node['hopsworks']['master']['password']%>
 ssl.key.password = <%= node['hopsworks']['master']['password']%>
-ssl.endpoint.identification.algorithm = 
+ssl.endpoint.identification.algorithm =
+group.id = <%= @group_id %>
 auto.offset.reset = earliest
 metadata.max.age.ms = 60000
 max.partition.fetch.bytes = 1048576

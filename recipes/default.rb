@@ -192,6 +192,7 @@ if node.attribute?('hopsworks')
   end
 end
 hopsworks_url = "https://#{consul_helper.get_service_fqdn("hopsworks.glassfish")}:#{hopsworks_internal_port}"
+opensearch_url = "https://#{consul_helper.get_service_fqdn("elastic")}:#{node['onlinefs']['opensearch']['port']}"
 
 mgm_fqdn = consul_helper.get_service_fqdn("#{node['ndb']['mgmd']['consul_tag']}.rondb")
 template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
@@ -202,7 +203,8 @@ template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
   variables(
     {
       :mgm_fqdn => mgm_fqdn,
-      :hopsworks_url => hopsworks_url
+      :hopsworks_url => hopsworks_url,
+      :opensearch_url => opensearch_url
     }
   )
 end
@@ -225,7 +227,22 @@ template "#{node['onlinefs']['etc']}/#{node['onlinefs']['kafka']['properties_fil
   mode 0750
   variables(
     {
-      :kafka_fqdn => kafka_fqdn
+      :kafka_fqdn => kafka_fqdn,
+      :group_id   => "#{node['onlinefs']['kafka_consumer']['ron_db_group_id']}"
+    }
+  )
+  only_if { node['onlinefs']['config_dir'].nil? }
+end
+
+template "#{node['onlinefs']['etc']}/#{node['onlinefs']['kafka']['properties_file_vector_db']}" do
+  source "onlinefs-kafka.properties.erb"
+  owner node['onlinefs']['user']
+  group node['onlinefs']['group']
+  mode 0750
+  variables(
+    {
+      :kafka_fqdn => kafka_fqdn,
+      :group_id   => "#{node['onlinefs']['kafka_consumer']['vector_db_group_id']}"
     }
   )
   only_if { node['onlinefs']['config_dir'].nil? }
