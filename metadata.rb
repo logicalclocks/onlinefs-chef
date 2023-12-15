@@ -13,6 +13,7 @@ depends 'ndb'
 depends 'hops'
 depends 'kagent'
 depends 'consul'
+depends 'elastic'
 
 attribute "onlinefs/user",
           :description => "User to run the online feature store service",
@@ -47,7 +48,15 @@ attribute "onlinefs/config_dir",
           :type => "string"
 
 attribute "onlinefs/service/thread_number",
+          :description => "number of threads handling metrics reporting",
+          :type => "string"
+
+attribute "onlinefs/service/ron_db_thread_number",
           :description => "number of threads reading from kafka and writing to rondb",
+          :type => "string"
+
+attribute "onlinefs/service/vector_db_thread_number",
+          :description => "number of threads reading from kafka and writing to vector db",
           :type => "string"
 
 attribute "onlinefs/service/get_session_retry_sleep_ms",
@@ -99,7 +108,11 @@ attribute "onlinefs/download_url",
           :type => "string"
 
 attribute "onlinefs/kafka/properties_file",
-          :description => "File used for configuring kafka client used by onlinefs (Default: onlinefs-kafka.properties)",
+          :description => "File used for configuring kafka client used by onlinefs writing to ron db (Default: onlinefs-kafka.properties)",
+          :type => "string"
+
+attribute "onlinefs/kafka/properties_file_vector_db",
+          :description => "File used for configuring kafka client used by onlinefs writing to vector db (Default: onlinefs-kafka-vector-db.properties)",
           :type => "string"
 
 attribute "onlinefs/kafka_consumer/topic_pattern",

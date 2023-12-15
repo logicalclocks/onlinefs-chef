@@ -33,6 +33,8 @@ default['onlinefs']['hopsworks']['password']  = "onlinefspw"
 default['onlinefs']['monitoring']             = 12800
 
 default['onlinefs']['service']['thread_number'] = 10
+default['onlinefs']['service']['ron_db_thread_number'] = 10
+default['onlinefs']['service']['vector_db_thread_number'] = 5
 default['onlinefs']['service']['get_session_retry_sleep_ms'] = 100
 default['onlinefs']['service']['max_blacklist_size'] = 100
 
@@ -47,8 +49,16 @@ default['onlinefs']['rondb']['use_dynamic_object_cache'] = "false"
 
 # kafka
 default['onlinefs']['kafka']['properties_file']   = "onlinefs-kafka.properties"
+default['onlinefs']['kafka']['properties_file_vector_db']   = "onlinefs-kafka-vector-db.properties"
 
 # kafka_consumer
 default['onlinefs']['kafka_consumer']['topic_pattern']    = ".*_onlinefs"
 default['onlinefs']['kafka_consumer']['topic_list']       = ""
 default['onlinefs']['kafka_consumer']['poll_timeout_ms']  = 1000
+default['onlinefs']['kafka_consumer']['ron_db_group_id']     = "onlinefs_rondb"
+default['onlinefs']['kafka_consumer']['vector_db_group_id']  = "onlinefs_vectordb"
+
+# Opensearch
+default['onlinefs']['opensearch']['port']       = node['elastic']['port']
+default['onlinefs']['opensearch']['user_name']  = node['elastic']['opensearch_security']['onlinefs']['username']
+default['onlinefs']['opensearch']['password']   = node['elastic']['opensearch_security']['onlinefs']['password']

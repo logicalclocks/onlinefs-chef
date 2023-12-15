@@ -2,6 +2,8 @@
 <onlinefs>
   <service>
     <threadNumber><%= node['onlinefs']['service']['thread_number'] %></threadNumber>
+    <ronDbThreadNumber><%= node['onlinefs']['service']['ron_db_thread_number'] %></ronDbThreadNumber>
+    <vectorDbThreadNumber><%= node['onlinefs']['service']['vector_db_thread_number'] %></vectorDbThreadNumber>
     <getSessionRetrySleepMs><%= node['onlinefs']['service']['get_session_retry_sleep_ms'] %></getSessionRetrySleepMs>
     <maxBlacklistSize><%= node['onlinefs']['service']['max_blacklist_size'] %></maxBlacklistSize>
   </service>
@@ -20,6 +22,7 @@
 
   <kafka>
     <propertiesFile><%= node['onlinefs']['kafka']['properties_file'] %></propertiesFile>
+    <propertiesFileVectorDb><%= node['onlinefs']['kafka']['properties_file_vector_db'] %></propertiesFileVectorDb>
   </kafka>
 
   <kafkaConsumer>
@@ -33,6 +36,12 @@
     <tokenLocation>/onlinefs/etc/token</tokenLocation>
     <url><%= @hopsworks_url %></url>
   </hopsworks>
+
+  <opensearch>
+    <host><%= @opensearch_url %></host>
+    <userName><%= node['onlinefs']['opensearch']['user_name'] %></userName>
+    <password><%= node['onlinefs']['opensearch']['password'] %></password>
+  </opensearch>
 
   <metrics>
     <port><%= node['onlinefs']['monitoring'] %></port>
