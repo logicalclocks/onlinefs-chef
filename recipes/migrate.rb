@@ -52,7 +52,7 @@ ruby_block 'check_versions_and_run_recipe' do
 
       for version in versions do
         for database in database_names do
-          cookbook_file "#{default['onlinefs']['data_volume']['etc_dir']}/migrate/#{version}__update.sql" do
+          cookbook_file "#{node['onlinefs']['data_volume']['etc_dir']}/migrate/#{version}__update.sql" do
             source "sql/#{version}__update.sql"
             owner node['onlinefs']['user']
             mode 0750
@@ -62,7 +62,7 @@ ruby_block 'check_versions_and_run_recipe' do
           bash "run_migrate_#{version}" do
             user "root"
             code <<-EOH
-              #{node['ndb']['scripts_dir']}/mysql-client.sh #{database} < #{default['onlinefs']['data_volume']['etc_dir']}/migrate/#{version}__update.sql
+              #{node['ndb']['scripts_dir']}/mysql-client.sh #{database} < #{node['onlinefs']['data_volume']['etc_dir']}/migrate/#{version}__update.sql
             EOH
           end
         end
