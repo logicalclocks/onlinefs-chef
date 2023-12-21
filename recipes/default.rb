@@ -1,3 +1,41 @@
+# all available migration version in ascending order, the versions need to match the version of files in files/default/sql
+migrate_versions = ["3.7.0"]
+current_version = node['hopsworks']['current_version']
+target_version = node['hopsworks']['version'].sub("-SNAPSHOT", "")
+# Ignore patch versions starting from version 3.0.0
+if Gem::Version.new(target_version) >= Gem::Version.new('3.0.0')
+  target_version_ignore_patch_arr = target_version.split(".")
+  target_version_ignore_patch_arr[2] = "0"
+  target_version = target_version_ignore_patch_arr.join(".")
+end
+
+unless current_version.empty?
+  target_gem_version = Gem::Version.new(target_version)
+  current_gem_version = Gem::Version.new(current_version)
+
+  migrate_versions.each do |migrate_version|
+    migrate_gem_version = Gem::Version.new(migrate_version)
+
+    if target_gem_version >= migrate_gem_version && migrate_gem_version >= current_gem_version
+      sql_file_path = "#{node['onlinefs']['data_volume']['etc_dir']}/migrate/#{migrate_gem_version}__update.sql"
+
+      cookbook_file sql_file_path do
+        source "sql/#{migrate_gem_version}__update.sql"
+        owner node['onlinefs']['user']
+        mode 0750
+        action :create
+      end
+
+      bash "run_migrate_#{migrate_gem_version}" do
+        user "root"
+        code <<-EOH
+          #{node['ndb']['scripts_dir']}/mysql-client.sh mysql < #{sql_file_path}
+        EOH
+      end
+    end
+  end
+end
+
 group node['onlinefs']['group'] do
   gid node['onlinefs']['group_id']
   action :create
