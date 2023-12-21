@@ -1,3 +1,4 @@
+### start of migration ###
 # all available migration version in ascending order, the versions need to match the version of files in files/default/sql
 migrate_versions = ["3.7.0"]
 current_version = node['hopsworks']['current_version']
@@ -16,12 +17,20 @@ unless current_version.empty?
   migrate_versions.each do |migrate_version|
     migrate_gem_version = Gem::Version.new(migrate_version)
 
-    if target_gem_version >= migrate_gem_version && migrate_gem_version >= current_gem_version
-      sql_file_path = "#{node['onlinefs']['data_volume']['etc_dir']}/migrate/#{migrate_gem_version}__update.sql"
+    if target_gem_version >= migrate_gem_version && migrate_gem_version > current_gem_version
+      migrate_directory = "#{node['onlinefs']['data_volume']['etc_dir']}/migrate"
+      directory migrate_directory do
+        owner node['onlinefs']['user']
+        group node['onlinefs']['group']
+        mode "0750"
+        action :create
+      end
+      sql_file_path = "#{migrate_directory}/#{migrate_gem_version}__update.sql"
 
       cookbook_file sql_file_path do
         source "sql/#{migrate_gem_version}__update.sql"
         owner node['onlinefs']['user']
+        group node['onlinefs']['group']
         mode 0750
         action :create
       end
@@ -35,6 +44,8 @@ unless current_version.empty?
     end
   end
 end
+
+### end of migration ###
 
 group node['onlinefs']['group'] do
   gid node['onlinefs']['group_id']
