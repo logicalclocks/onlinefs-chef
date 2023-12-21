@@ -117,7 +117,3 @@ attribute "onlinefs/kafka_consumer/poll_timeout_ms",
 attribute "onlinefs/default/private_ips",
           :description => "List of private IPs where onlinefs service is running",
           :type => "string"
-
-attribute "onlinefs/migrate/versions",
-          :description => "List of versions to migrate. Versions should be comma separated and in ascending order.",
-          :type => "string"
