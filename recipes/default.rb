@@ -10,7 +10,10 @@ if Gem::Version.new(target_version) >= Gem::Version.new('3.0.0')
   target_version = target_version_ignore_patch_arr.join(".")
 end
 
-unless current_version.empty?
+private_ip = my_private_ip()
+is_first_node_to_run = private_ip.eql?(node['onlinefs']['default']['private_ips'].sort[0])
+
+if !current_version.empty? && is_first_node_to_run
   target_gem_version = Gem::Version.new(target_version)
   current_gem_version = Gem::Version.new(current_version)
 
