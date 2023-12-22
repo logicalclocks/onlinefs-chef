@@ -1,8 +1,8 @@
 ### start of migration ###
 # all available migration version in ascending order, the versions need to match the version of files in files/default/sql
 migrate_versions = ["3.7.0"]
-current_version = node['hopsworks']['current_version']
-target_version = node['hopsworks']['version'].sub("-SNAPSHOT", "")
+current_version = node['install']['current_version']
+target_version = node['install']['version'].sub("-SNAPSHOT", "")
 # Ignore patch versions starting from version 3.0.0
 if Gem::Version.new(target_version) >= Gem::Version.new('3.0.0')
   target_version_ignore_patch_arr = target_version.split(".")
