@@ -31,6 +31,10 @@
     <pollTimeoutMs><%= node['onlinefs']['kafka_consumer']['poll_timeout_ms'] %></pollTimeoutMs>
   </kafkaConsumer>
 
+  <notification>
+    <topicName><%= node['onlinefs']['notification']['topic_name'] %></topicName>
+  </notification>
+
   <hopsworks>
     <trustStoreLocation>/certs/<%= node['onlinefs']['user'] %>__tstore.jks</trustStoreLocation>
     <tokenLocation>/onlinefs/etc/token</tokenLocation>

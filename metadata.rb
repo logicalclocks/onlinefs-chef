@@ -127,6 +127,10 @@ attribute "onlinefs/kafka_consumer/poll_timeout_ms",
           :description => "Duration of kafka consumer poll request in onlinefs (Default: 1000)",
           :type => "string"
 
+attribute "onlinefs/notification/topic_name",
+          :description => "Topic name to which onlinefs kafka producer will send notifications",
+          :type => "string"
+
 attribute "onlinefs/default/private_ips",
           :description => "List of private IPs where onlinefs service is running",
           :type => "string"

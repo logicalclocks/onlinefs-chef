@@ -58,6 +58,9 @@ default['onlinefs']['kafka_consumer']['poll_timeout_ms']  = 1000
 default['onlinefs']['kafka_consumer']['ron_db_group_id']     = "onlinefs_rondb"
 default['onlinefs']['kafka_consumer']['vector_db_group_id']  = "onlinefs_vectordb"
 
+# notification
+default['onlinefs']['notification']['topic_name']    = "onlinefs_notification"
+
 # Opensearch
 default['onlinefs']['opensearch']['port']       = node['elastic']['port']
 default['onlinefs']['opensearch']['user_name']  = node['elastic']['opensearch_security']['onlinefs']['username']
