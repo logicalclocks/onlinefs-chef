@@ -127,8 +127,8 @@ attribute "onlinefs/kafka_consumer/poll_timeout_ms",
           :description => "Duration of kafka consumer poll request in onlinefs (Default: 1000)",
           :type => "string"
 
-attribute "onlinefs/notification/topic_name",
-          :description => "Topic name to which onlinefs kafka producer will send notifications",
+attribute "onlinefs/notification/topic_name_suffix",
+          :description => "Topic name suffix that is appended to project ID, the generated topic name will be used by the OnlineFS Kafka producer to send notifications",
           :type => "string"
 
 attribute "onlinefs/default/private_ips",

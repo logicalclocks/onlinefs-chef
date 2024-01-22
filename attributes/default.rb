@@ -59,7 +59,7 @@ default['onlinefs']['kafka_consumer']['ron_db_group_id']     = "onlinefs_rondb"
 default['onlinefs']['kafka_consumer']['vector_db_group_id']  = "onlinefs_vectordb"
 
 # notification
-default['onlinefs']['notification']['topic_name']    = "onlinefs_notification"
+default['onlinefs']['notification']['topic_name_suffix']    = "_onlinefs_notification"
 
 # Opensearch
 default['onlinefs']['opensearch']['port']       = node['elastic']['port']
