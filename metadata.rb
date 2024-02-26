@@ -58,6 +58,30 @@ attribute "onlinefs/service/max_blacklist_size",
           :description => "Maximum count of entries stored in blacklist",
           :type => "string"
 
+attribute "onlinefs/service/max_feature_group_cache_size",
+          :description => "Maximum count of entries stored in feature group cache (Default: 1000)",
+          :type => "string"
+
+attribute "onlinefs/service/max_feature_store_cache_size",
+          :description => "Maximum count of entries stored in feature store cache (Default: 1000)",
+          :type => "string"
+
+attribute "onlinefs/service/max_feature_view_cache_size",
+          :description => "Maximum count of entries stored in feature view cache (Default: 1000)",
+          :type => "string"
+
+attribute "onlinefs/service/feature_group_cache_expire",
+          :description => "Time it take for entries stored in feature group cache to expire (Default: 30 minutes)",
+          :type => "string"
+
+attribute "onlinefs/service/feature_store_cache_expire",
+          :description => "Time it take for entries stored in feature store cache to expire (Default: 30 minutes)",
+          :type => "string"
+
+attribute "onlinefs/service/feature_view_cache_expire",
+          :description => "Time it take for entries stored in feature view cache to expire (Default: 10 minutes)",
+          :type => "string"
+
 attribute "onlinefs/monitoring",
           :description => "Port on which the monitoring page is available",
           :type => "string"

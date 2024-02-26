@@ -36,6 +36,14 @@ default['onlinefs']['service']['thread_number'] = 10
 default['onlinefs']['service']['get_session_retry_sleep_ms'] = 100
 default['onlinefs']['service']['max_blacklist_size'] = 100
 
+default['onlinefs']['service']['max_feature_group_cache_size'] = 1000
+default['onlinefs']['service']['max_feature_store_cache_size'] = 1000
+default['onlinefs']['service']['max_feature_view_cache_size'] = 1000
+
+default['onlinefs']['service']['feature_group_cache_expire'] = 30
+default['onlinefs']['service']['feature_store_cache_expire'] = 30
+default['onlinefs']['service']['feature_view_cache_expire'] = 10
+
 default['onlinefs']['rondb']['batch_size']           = 300
 default['onlinefs']['rondb']['max_transactions']     = 1024
 default['onlinefs']['rondb']['max_cached_sessions']  = 20
