@@ -29,7 +29,21 @@ BEGIN
             LEAVE read_loop;
         END IF;
         SET @alter_query := CONCAT(
-                'ALTER TABLE `', db_name, '`.`kafka_offsets` ADD COLUMN `consumer_group` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL DEFAULT ''RONDB'''
+                'ALTER TABLE `', db_name, '`.`kafka_offsets` DROP PRIMARY KEY'
+        );
+        PREPARE stmt FROM @alter_query;
+        EXECUTE stmt;
+        DEALLOCATE PREPARE stmt;
+
+        SET @alter_query := CONCAT(
+                'ALTER TABLE `', db_name, '`.`kafka_offsets` ADD COLUMN `consumer_group` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL DEFAULT ''RONDB'' FIRST'
+        );
+        PREPARE stmt FROM @alter_query;
+        EXECUTE stmt;
+        DEALLOCATE PREPARE stmt;
+
+        SET @alter_query := CONCAT(
+                'ALTER TABLE `', db_name, '`.`kafka_offsets` ADD PRIMARY KEY(`consumer_group`,`topic`,`partition`)'
         );
         PREPARE stmt FROM @alter_query;
         EXECUTE stmt;
