@@ -12,6 +12,10 @@
     <featureGroupCacheExpire><%= node['onlinefs']['service']['feature_group_cache_expire'] %></featureGroupCacheExpire>
     <featureStoreCacheExpire><%= node['onlinefs']['service']['feature_store_cache_expire'] %></featureStoreCacheExpire>
     <featureViewCacheExpire><%= node['onlinefs']['service']['feature_view_cache_expire'] %></featureViewCacheExpire>
+
+    <% if not node['hops']['alive-watchdog']['json-poll']['dc-id'].eql?("") -%>
+    <region><%= node['hops']['alive-watchdog']['json-poll']['dc-id'] %></region>
+    <% end -%>
   </service>
 
   <rondb>
