@@ -34,7 +34,7 @@ default['onlinefs']['monitoring']             = 12800
 
 default['onlinefs']['service']['thread_number'] = 10
 default['onlinefs']['service']['ron_db_thread_number'] = 10
-default['onlinefs']['service']['vector_db_thread_number'] = 5
+default['onlinefs']['service']['vector_db_thread_number'] = 10
 default['onlinefs']['service']['get_session_retry_sleep_ms'] = 100
 default['onlinefs']['service']['max_blacklist_size'] = 100
 
