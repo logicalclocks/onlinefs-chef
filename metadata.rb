@@ -18,6 +18,10 @@ attribute "onlinefs/user",
           :description => "User to run the online feature store service",
           :type => "string"
 
+attribute "onlinefs/version",
+          :description => "Version of the OnlineFS binary to download",
+          :type => "string"
+
 attribute "onlinefs/user_id",
           :description => "onlinefs user id. Default: 1521",
           :type => "string"
