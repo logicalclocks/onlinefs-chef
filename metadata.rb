@@ -143,6 +143,10 @@ attribute "onlinefs/kafka/properties_file_vector_db",
           :description => "File used for configuring kafka client used by onlinefs writing to vector db (Default: onlinefs-kafka-vector-db.properties)",
           :type => "string"
 
+attribute "onlinefs/kafka/properties_file_notification",
+          :description => "File used for configuring kafka client used by onlinefs for writing to notification topic (Default: onlinefs-kafka.properties)",
+          :type => "string"
+
 attribute "onlinefs/kafka_consumer/topic_pattern",
           :description => "Pattern to which onlinefs kafka consumer should subscribe to (Default: .*_onlinefs)",
           :type => "string"
