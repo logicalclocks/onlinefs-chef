@@ -58,6 +58,7 @@ default['onlinefs']['rondb']['use_dynamic_object_cache'] = "false"
 # kafka
 default['onlinefs']['kafka']['properties_file']   = "onlinefs-kafka.properties"
 default['onlinefs']['kafka']['properties_file_vector_db']   = "onlinefs-kafka-vector-db.properties"
+default['onlinefs']['kafka']['properties_file_notification']   = node['onlinefs']['kafka']['properties_file']
 
 # kafka_consumer
 default['onlinefs']['kafka_consumer']['topic_pattern']    = ".*_onlinefs"
