@@ -261,14 +261,24 @@ template "#{node['onlinefs']['etc']}/onlinefs-site.xml" do
   )
 end
 
-ruby_block 'copy-config-dir' do
+ruby_block 'copy-consumer-config-dir' do
   block do
     require 'fileutils'
 
-    # Copy everything from the provided config_dir to etc overwriting any duplicates
-    FileUtils.cp_r(Dir["#{node['onlinefs']['config_dir']}/*"], node['onlinefs']['etc'])
+    # Copy everything from the provided consumer_config_dir to etc overwriting any duplicates
+    FileUtils.cp_r(Dir["#{node['onlinefs']['consumer_config_dir']}/*"], node['onlinefs']['etc'])
   end
-  not_if { node['onlinefs']['config_dir'].nil? }
+  not_if { node['onlinefs']['consumer_config_dir'].nil? }
+end
+
+ruby_block 'copy-producer-config-dir' do
+  block do
+    require 'fileutils'
+
+    # Copy everything from the provided producer_config_dir to etc overwriting any duplicates
+    FileUtils.cp_r(Dir["#{node['onlinefs']['producer_config_dir']}/*"], node['onlinefs']['etc'])
+  end
+  not_if { node['onlinefs']['producer_config_dir'].nil? }
 end
 
 kafka_fqdn = consul_helper.get_service_fqdn("broker.kafka")
@@ -283,7 +293,7 @@ template "#{node['onlinefs']['etc']}/#{node['onlinefs']['kafka']['properties_fil
       :group_id   => "#{node['onlinefs']['kafka_consumer']['ron_db_group_id']}"
     }
   )
-  only_if { node['onlinefs']['config_dir'].nil? }
+  only_if { node['onlinefs']['consumer_config_dir'].nil? }
 end
 
 template "#{node['onlinefs']['etc']}/#{node['onlinefs']['kafka']['properties_file_vector_db']}" do
@@ -297,7 +307,20 @@ template "#{node['onlinefs']['etc']}/#{node['onlinefs']['kafka']['properties_fil
       :group_id   => "#{node['onlinefs']['kafka_consumer']['vector_db_group_id']}"
     }
   )
-  only_if { node['onlinefs']['config_dir'].nil? }
+  only_if { node['onlinefs']['consumer_config_dir'].nil? }
+end
+
+template "#{node['onlinefs']['etc']}/#{node['onlinefs']['kafka']['properties_file_notification']}" do
+  source "producer.properties.erb"
+  owner node['onlinefs']['user']
+  group node['onlinefs']['group']
+  mode 0750
+  variables(
+    {
+      :kafka_fqdn => kafka_fqdn
+    }
+  )
+  only_if { node['onlinefs']['producer_config_dir'].nil? }
 end
 
 template "#{node['onlinefs']['etc']}/log4j.properties" do
