@@ -47,8 +47,12 @@ attribute "onlinefs/instance_id",
           :description => "Id of the onlinefs instance. Used for certificate generation. (Default: the index in the IP list)",
           :type => "string"
 
-attribute "onlinefs/config_dir",
-          :description => "Kafka configuration for bring your own Kafka. The content of this directory will be copied in onlinefs/etc and mounted on the container.",
+attribute "onlinefs/consumer_config_dir",
+          :description => "Kafka configuration for bring your own Kafka. The content of this directory will be copied in onlinefs/etc and mounted on the container to be used for consuming from topic.",
+          :type => "string"
+
+attribute "onlinefs/producer_config_dir",
+          :description => "Kafka configuration for bring your own Kafka. The content of this directory will be copied in onlinefs/etc and mounted on the container to be used for producing to topic.",
           :type => "string"
 
 attribute "onlinefs/service/thread_number",
@@ -144,7 +148,7 @@ attribute "onlinefs/kafka/properties_file_vector_db",
           :type => "string"
 
 attribute "onlinefs/kafka/properties_file_notification",
-          :description => "File used for configuring kafka client used by onlinefs for writing to notification topic (Default: onlinefs-kafka.properties)",
+          :description => "File used for configuring kafka client used by onlinefs for writing to notification topic (Default: producer.properties)",
           :type => "string"
 
 attribute "onlinefs/kafka_consumer/topic_pattern",

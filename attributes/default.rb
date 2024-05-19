@@ -20,7 +20,8 @@ default['onlinefs']['instance_id']            = ""
 default['onlinefs']['java_start_heap_size']   = '1024M'
 default['onlinefs']['java_max_heap_size']     = '4096M'
 
-default['onlinefs']['config_dir']             = nil
+default['onlinefs']['consumer_config_dir']             = nil
+default['onlinefs']['producer_config_dir']             = nil
 
 # Data volume directories
 default['onlinefs']['data_volume']['root_dir']  = "#{node['data']['dir']}/onlinefs"
@@ -58,7 +59,7 @@ default['onlinefs']['rondb']['use_dynamic_object_cache'] = "false"
 # kafka
 default['onlinefs']['kafka']['properties_file']   = "onlinefs-kafka.properties"
 default['onlinefs']['kafka']['properties_file_vector_db']   = "onlinefs-kafka-vector-db.properties"
-default['onlinefs']['kafka']['properties_file_notification']   = node['onlinefs']['kafka']['properties_file']
+default['onlinefs']['kafka']['properties_file_notification']   = "producer.properties"
 
 # kafka_consumer
 default['onlinefs']['kafka_consumer']['topic_pattern']    = ".*_onlinefs"
